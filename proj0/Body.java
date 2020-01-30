@@ -32,7 +32,7 @@ public class Body {
     //calculate the distance between two Bodys
     public double calcDistance(Body b){
         double dx=b.xxPos-this.xxPos;
-        double dy=b.yyPos-this.xxPos;
+        double dy=b.yyPos-this.yyPos;
         double r=Math.hypot(dx,dy);
         return r;
     }
@@ -47,7 +47,7 @@ public class Body {
     public double calcForceExertedByX(Body b){
         double FX;
         double dx=b.xxPos-this.xxPos;
-        double dy=b.yyPos-this.xxPos;
+        double dy=b.yyPos-this.yyPos;
         double r=Math.hypot(dx,dy);
         FX=this.calcForceExertedBy(b)*dx/r;
         return FX;
@@ -56,7 +56,7 @@ public class Body {
     public double calcForceExertedByY(Body b){
         double FY;
         double dx=b.xxPos-this.xxPos;
-        double dy=b.yyPos-this.xxPos;
+        double dy=b.yyPos-this.yyPos;
         double r=Math.hypot(dx,dy);
         FY=this.calcForceExertedBy(b)*dy/r;
         return FY;
