@@ -13,7 +13,7 @@ public class NBody {
     }
     //Given a file name, it should return an array of Bodys corresponding to the bodies in the file,
     // e.g. readBodies("./data/planets.txt") should return an array of five planets.
-    public static Planet[] readBodies(String fileName){
+    public static Planet[] readPlanets(String fileName){
         In in=new In(fileName);
         int N=in.readInt();
         double R=in.readDouble();
@@ -39,7 +39,7 @@ public class NBody {
         double T=Double.parseDouble(args[0]);
         double dt=Double.parseDouble(args[1]);
         String filename=args[2];
-        Planet[] planets=NBody.readBodies(filename);
+        Planet[] planets=NBody.readPlanets(filename);
         double radius=NBody.readRadius(filename);
 
         //drawing the background
