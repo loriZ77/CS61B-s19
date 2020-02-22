@@ -1,4 +1,4 @@
-public class Body {
+public class Planet {
 
     //6 public instance variables
     public double xxPos;
@@ -10,7 +10,7 @@ public class Body {
     static final double G=6.67e-11;
 
     //first constructor
-    public Body(double xP, double yP, double xV, double yV, double m, String img){
+    public Planet(double xP, double yP, double xV, double yV, double m, String img){
         xxPos=xP;
         yyPos=yP;
         xxVel=xV;
@@ -20,7 +20,7 @@ public class Body {
 
     }
     //second constructor：initialize an identical Body object
-    public Body(Body b){
+    public Planet(Planet b){
         xxPos=b.xxPos;
         yyPos=b.yyPos;
         xxVel=b.xxVel;
@@ -30,42 +30,36 @@ public class Body {
 
     }
     //calculate the distance between two Bodys
-    public double calcDistance(Body b){
+    public double calcDistance(Planet b){
         double dx=b.xxPos-this.xxPos;
         double dy=b.yyPos-this.yyPos;
         double r=Math.hypot(dx,dy);
         return r;
     }
     // return a double describing the force exerted on this body by the given body
-    public double calcForceExertedBy(Body b){
+    public double calcForceExertedBy(Planet b){
         double F;
         F=(G*this.mass*b.mass)/Math.pow(this.calcDistance(b),2);
         return F;
 
     }
     //return the total force, describe the force exerted in the X direction
-    public double calcForceExertedByX(Body b){
+    public double calcForceExertedByX(Planet b){
         double FX;
-        double dx=b.xxPos-this.xxPos;
-        double dy=b.yyPos-this.yyPos;
-        double r=Math.hypot(dx,dy);
-        FX=this.calcForceExertedBy(b)*dx/r;
+        FX=this.calcForceExertedBy(b)*(b.xxPos-this.xxPos)/this.calcDistance(b);
         return FX;
     }
     //return the total force, describe the force exerted in the Y direction
-    public double calcForceExertedByY(Body b){
+    public double calcForceExertedByY(Planet b){
         double FY;
-        double dx=b.xxPos-this.xxPos;
-        double dy=b.yyPos-this.yyPos;
-        double r=Math.hypot(dx,dy);
-        FY=this.calcForceExertedBy(b)*dy/r;
+        FY=this.calcForceExertedBy(b)*(b.yyPos-this.yyPos)/this.calcDistance(b);
         return FY;
     }
     //calculate the net force in x direction
-    public double calcNetForceExertedByX(Body[] allB){
+    public double calcNetForceExertedByX(Planet[] allB){
         double netForceX=0;
         //enhanced for loop
-        for(Body b:allB){
+        for(Planet b:allB){
             if (this.equals(b)){
                 continue;
             }
@@ -74,9 +68,9 @@ public class Body {
         return netForceX;
     }
     //calculate the net force in y direction
-    public double calcNetForceExertedByY(Body[] allB){
+    public double calcNetForceExertedByY(Planet[] allB){
         double netForceY=0;
-        for(Body b:allB){
+        for(Planet b:allB){
             if (this.equals(b)){
                 continue;
             }
