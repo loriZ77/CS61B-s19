@@ -145,15 +145,15 @@ public class LinkedListDeque<T> {
     }
 
     //Creates a deep copy of other
-    public LinkedListDeque(LinkedListDeque other){
-    sentinel = new TNode(null,null,null);
-    sentinel.prev = sentinel;
-    sentinel.next = sentinel;
-    size=0;
-        for(int i=0;i<other.size;i++){
-        this.addLast((T)other.get(i));
-    }
-    }
+//    public LinkedListDeque(LinkedListDeque other){
+//    sentinel = new TNode(null,null,null);
+//    sentinel.prev = sentinel;
+//    sentinel.next = sentinel;
+//    size=0;
+//        for(int i=0;i<other.size;i++){
+//        this.addLast((T)other.get(i));
+//    }
+//    }
 
 
 //    //main method

@@ -9,7 +9,7 @@ public class ArrayDeque<T> {
     /**
      * creates an empty array deque
      */
-    public ArrayDeque(){
+    public ArrayDeque() {
         array = (T[]) new Object[8];
         size = 0;
         nextFirst = (array.length / 2) - 1;
@@ -21,7 +21,7 @@ public class ArrayDeque<T> {
      * resize the underlying array with target capacity
      * create a new array 'a', copy the original array 'array' from the head to tail
      */
-    private void resize(int capacity){
+    private void resize(int capacity) {
 
 //        //Condition 1: enlarge array to double size when array is full
 //        if(size==array.length) {
@@ -67,16 +67,16 @@ public class ArrayDeque<T> {
      * helper function to record moves of nextFirst
      */
     private int minusOne(int index){
-        return (index-1 + array.length) % array.length;
+        return (index - 1 + array.length) % array.length;
     }
 
     /**
      * Adds an item of type T to the back of the deque
      */
-    public void addLast(T item){
+    public void addLast(T item) {
 
         //check whether array is full
-        if(size == array.length){
+        if(size == array.length) {
             resize(size * RFACTOR);
         }
         array[nextLast] = item;
@@ -87,7 +87,7 @@ public class ArrayDeque<T> {
     /**
      * helper function to record moves of nextLast
      */
-    private int plusOne(int index){
+    private int plusOne(int index) {
 
         return (index+1 + array.length) % array.length;
     }
@@ -95,7 +95,7 @@ public class ArrayDeque<T> {
     /**
      * Returns true if deque is empty, false otherwise
      */
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return (size == 0);
     }
 
@@ -110,12 +110,12 @@ public class ArrayDeque<T> {
      * Prints the items in the deque from first to last, separated by a space.
      * Once all the items have been printed, print out a new line.
      */
-    public void printDeque(){
-        int curr=plusOne(nextFirst);
+    public void printDeque() {
+        int curr = plusOne(nextFirst);
 
-        for(int i=0;i<size;i++){
-            System.out.print(array[curr]+ " ");
-            curr=plusOne(curr);
+        for(int i = 0;i < size; i++) {
+            System.out.print(array[curr] + " ");
+            curr = plusOne(curr);
         }
         System.out.println();
     }
@@ -124,13 +124,13 @@ public class ArrayDeque<T> {
      * Removes and returns the item at the front of the deque.
      * If no such item exists, returns null
      */
-    public T removeFirst(){
+    public T removeFirst() {
         //if empty, return null
-        if(isEmpty()){
+        if(isEmpty()) {
             return  null;
         }
         //not empty
-        else{
+        else {
             //current head position
             int atFirst = plusOne(nextFirst);
 
@@ -202,56 +202,56 @@ public class ArrayDeque<T> {
     /**
      * Creates a deep copy of other
      */
-    public ArrayDeque(ArrayDeque other){
-        array = (T[]) new Object[other.size];
-        nextFirst = other.nextFirst;
-        nextLast = other.nextLast;
-        size = other.size;
-        usageR = other.usageR;
-        System.arraycopy(other.array,0, this.array,0, size);
-    }
+//    public ArrayDeque(ArrayDeque other){
+//        array = (T[]) new Object[other.size];
+//        nextFirst = other.nextFirst;
+//        nextLast = other.nextLast;
+//        size = other.size;
+//        usageR = other.usageR;
+//        System.arraycopy(other.array,0, this.array,0, size);
+//    }
 
 
 
 
 //test
-    public static void main(String[] args){
-        ArrayDeque<Integer> AList=new ArrayDeque<>();
-        AList.addLast(4);
-        AList.addLast(5);
-        AList.addLast(6);
-        AList.addLast(7);
-        AList.addFirst(1);
-        AList.addFirst(2);
-        AList.addFirst(3);
-        AList.addFirst(4);
-        AList.addFirst(1);
-        AList.addFirst(2);
-        AList.addLast(4);
-        AList.addLast(5);
-        AList.addFirst(7);
-        AList.addFirst(8);
-        AList.addFirst(9);
-        AList.addLast(4);
-        AList.addLast(5);
-        AList.addLast(6);
-        AList.addLast(7);
-        AList.addLast(8);
-        AList.addFirst(1);
-        AList.addFirst(2);
-        AList.addLast(4);
-        AList.addLast(5);
-        AList.addFirst(7);
-        AList.addFirst(8);
-        AList.addFirst(9);
-        AList.addLast(7);
-        AList.addFirst(1);
-        AList.addFirst(2);
-        AList.addFirst(3);
-        AList.addFirst(4);
-        AList.addFirst(1);
-        AList.addFirst(2);
-
-
-    }
+//    public static void main(String[] args){
+//        ArrayDeque<Integer> AList=new ArrayDeque<>();
+//        AList.addLast(4);
+//        AList.addLast(5);
+//        AList.addLast(6);
+//        AList.addLast(7);
+//        AList.addFirst(1);
+//        AList.addFirst(2);
+//        AList.addFirst(3);
+//        AList.addFirst(4);
+//        AList.addFirst(1);
+//        AList.addFirst(2);
+//        AList.addLast(4);
+//        AList.addLast(5);
+//        AList.addFirst(7);
+//        AList.addFirst(8);
+//        AList.addFirst(9);
+//        AList.addLast(4);
+//        AList.addLast(5);
+//        AList.addLast(6);
+//        AList.addLast(7);
+//        AList.addLast(8);
+//        AList.addFirst(1);
+//        AList.addFirst(2);
+//        AList.addLast(4);
+//        AList.addLast(5);
+//        AList.addFirst(7);
+//        AList.addFirst(8);
+//        AList.addFirst(9);
+//        AList.addLast(7);
+//        AList.addFirst(1);
+//        AList.addFirst(2);
+//        AList.addFirst(3);
+//        AList.addFirst(4);
+//        AList.addFirst(1);
+//        AList.addFirst(2);
+//
+//
+//    }
 }
