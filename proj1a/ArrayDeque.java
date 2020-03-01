@@ -202,14 +202,14 @@ public class ArrayDeque<T> {
     /**
      * Creates a deep copy of other
      */
-//    public ArrayDeque(ArrayDeque other){
-//        array = (T[]) new Object[other.size];
-//        nextFirst = other.nextFirst;
-//        nextLast = other.nextLast;
-//        size = other.size;
-//        usageR = other.usageR;
-//        System.arraycopy(other.array,0, this.array,0, size);
-//    }
+    public ArrayDeque(ArrayDeque other){
+        array = (T[]) new Object[other.size];
+        nextFirst = other.nextFirst;
+        nextLast = other.nextLast;
+        size = other.size;
+        usageR = other.usageR;
+        System.arraycopy(other.array,0, this.array,0, size);
+    }
 
 
 
