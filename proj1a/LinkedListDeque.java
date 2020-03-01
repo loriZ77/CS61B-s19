@@ -1,4 +1,3 @@
-import javax.swing.*;
 
 public class LinkedListDeque<T> {
     private TNode sentinel;
@@ -166,8 +165,6 @@ public class LinkedListDeque<T> {
         Dllist.removeFirst();
         Dllist.removeLast();
         LinkedListDeque<Integer> Copy = new LinkedListDeque<>(Dllist);
-
-
 
     }
 }
