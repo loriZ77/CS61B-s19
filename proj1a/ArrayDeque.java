@@ -4,26 +4,26 @@ public class ArrayDeque<T> {
     private int nextFirst;
     private int nextLast;
     private double usageR;
-    private static final int RFACTOR=2;
+    private static final int RFACTOR = 2;
 
     /**
      * creates an empty array deque
      */
     public ArrayDeque(){
-        array=(T[]) new Object[8];
-        size=0;
-        nextFirst=(array.length/2)-1;
-        nextLast=(array.length/2);
-        usageR=(double)size/array.length;
+        array = (T[]) new Object[8];
+        size = 0;
+        nextFirst = (array.length / 2) - 1;
+        nextLast = (array.length / 2);
+        usageR = (double) size / array.length;
     }
 
     /**
      * resize the underlying array with target capacity
      * create a new array 'a', copy the original array 'array' from the head to tail
      */
-    public void resize(int capacity){
+    private void resize(int capacity){
 
-//        //Condition 1: enlarge array to double size when reach the capacity
+//        //Condition 1: enlarge array to double size when array is full
 //        if(size==array.length) {
             T[] a = (T[]) new Object[capacity];
             //System.arraycopy(array,0,a,0,nextFirst);//第一次自己尝试 左边copy 右边copy 中间插空
@@ -54,20 +54,20 @@ public class ArrayDeque<T> {
      */
     public void addFirst(T item){
 
-        //check whether reach to capacity of array
-        if(size==array.length){
-            resize(size*RFACTOR);
+        //check whether array is full
+        if (size == array.length){
+            resize(size * RFACTOR);
         }
-        array[nextFirst]=item;
-        size+=1;
+        array[nextFirst] = item;
+        size += 1;
         //head moves
-        nextFirst=minusOne(nextFirst);
+        nextFirst = minusOne(nextFirst);
     }
     /**
      * helper function to record moves of nextFirst
      */
-    public int minusOne(int index){
-        return (index-1 + array.length)% array.length;
+    private int minusOne(int index){
+        return (index-1 + array.length) % array.length;
     }
 
     /**
@@ -75,27 +75,28 @@ public class ArrayDeque<T> {
      */
     public void addLast(T item){
 
-        //check whether reach to capacity of array
-        if(size==array.length){
-            resize(size*RFACTOR);
+        //check whether array is full
+        if(size == array.length){
+            resize(size * RFACTOR);
         }
-        array[nextLast]=item;
-        size+=1;
+        array[nextLast] = item;
+        size += 1;
         //tail moves
-        nextLast=plusOne(nextLast);
+        nextLast = plusOne(nextLast);
     }
     /**
      * helper function to record moves of nextLast
      */
-    public int plusOne(int index){
-        return (index+1 + array.length)% array.length;
+    private int plusOne(int index){
+
+        return (index+1 + array.length) % array.length;
     }
 
     /**
      * Returns true if deque is empty, false otherwise
      */
     public boolean isEmpty(){
-        return (size==0);
+        return (size == 0);
     }
 
     /**
@@ -131,21 +132,21 @@ public class ArrayDeque<T> {
         //not empty
         else{
             //current head position
-            int atFirst=plusOne(nextFirst);
+            int atFirst = plusOne(nextFirst);
 
             //remFirst pointer holds current head
-            T remFirst=array[atFirst];
+            T remFirst = array[atFirst];
 
             //set current head to null
-            array[atFirst]=null;
+            array[atFirst] = null;
 
             //next head position moves
             nextFirst=plusOne(nextFirst);
-            size-=1;
+            size -= 1;
 
             //　check memory efficiency
-            if(array.length>=16&&usageR<0.25){
-                resize(array.length/2);
+            if(array.length >= 16 && size < array.length * 0.25){
+                resize(array.length / 2);
         }
             return remFirst;
         }
@@ -156,27 +157,27 @@ public class ArrayDeque<T> {
      */
     public T removeLast(){
         //if empty, return null
-        if(isEmpty()){
+        if(isEmpty()) {
             return  null;
         }
         //not empty
-        else{
+        else {
             //current tail position
-            int atLast=minusOne(nextLast);
+            int atLast = minusOne(nextLast);
 
             //remLast pointer holds current tail
-            T remLast=array[atLast];
+            T remLast = array[atLast];
 
             //set current tail to null
-            array[atLast]=null;
+            array[atLast] = null;
 
             //next tail position moves
-            nextLast=minusOne(nextLast);
-            size-=1;
+            nextLast = minusOne(nextLast);
+            size -= 1;
 
             //　check memory efficiency
-            if(array.length>=16&&usageR<0.25){
-                resize(array.length/2);
+            if(array.length >= 16 && size < array.length * 0.25){
+                resize(array.length / 2);
             }
             return remLast;
         }
@@ -187,13 +188,13 @@ public class ArrayDeque<T> {
      * If no such item exists, returns null. Must not alter the deque!
      */
     public T get(int index){
-        if(index>=size){
+        if(index >= size){
             return null;
         }
         else {
             //start from head position
             int atIndex = plusOne(nextFirst);
-            atIndex=(atIndex+index)%array.length;
+            atIndex = (atIndex+index) % array.length;
             return array[atIndex];
         }
     }
@@ -202,12 +203,12 @@ public class ArrayDeque<T> {
      * Creates a deep copy of other
      */
     public ArrayDeque(ArrayDeque other){
-        array=(T[]) new Object[other.size];
-        nextFirst=other.nextFirst;
-        nextLast=other.nextLast;
-        size=other.size;
-        usageR=other.usageR;
-        System.arraycopy(other.array,0,this.array,0,size);
+        array = (T[]) new Object[other.size];
+        nextFirst = other.nextFirst;
+        nextLast = other.nextLast;
+        size = other.size;
+        usageR = other.usageR;
+        System.arraycopy(other.array,0, this.array,0, size);
     }
 
 
@@ -243,7 +244,13 @@ public class ArrayDeque<T> {
         AList.addFirst(7);
         AList.addFirst(8);
         AList.addFirst(9);
-
+        AList.addLast(7);
+        AList.addFirst(1);
+        AList.addFirst(2);
+        AList.addFirst(3);
+        AList.addFirst(4);
+        AList.addFirst(1);
+        AList.addFirst(2);
 
 
     }
